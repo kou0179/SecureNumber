@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>It hides your important numbers while behaving like a primitive type.
+</Description>
+    <Copyright>Kota Sakahara (Sakepon)</Copyright>
+    <PackageLicenseExpression>MIT LICENCE</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/kou0179/SecureNumber</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kou0179/SecureNumber</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
