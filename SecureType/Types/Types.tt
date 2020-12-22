@@ -1,0 +1,187 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#
+    IEnumerable<string> baseTypeList = new List<string>() { "Int16", "Int32", "Int64", "Single", "Double", "UInt16", "UInt32", "UInt64" };
+    HashSet<string> skipBitOperatorList = new HashSet<string>() { "Single", "Double", "" } ;
+#>
+
+using SecureNumber.Encryption;
+using System;
+
+namespace SecureNumber.Types
+{
+<# foreach(var baseTypeName in baseTypeList){ #>
+    public struct <#=baseTypeName#>_s : ISecureNumber<<#=baseTypeName#>, <#=baseTypeName#>_s>
+    {
+        private byte[] _value;
+
+        private <#=baseTypeName#>_s(byte[] value)
+        {
+            _value = value;
+        }
+
+        #region operators
+
+        public static implicit operator <#=baseTypeName#>_s(<#=baseTypeName#> value) => new <#=baseTypeName#>_s(NumberEncryption.Encryption(value));
+
+        public static <#=baseTypeName#>_s operator +(<#=baseTypeName#>_s value) => (<#=baseTypeName#>)(+NumberEncryption.DecryptionAs<#=baseTypeName#>(value._value));
+
+        <# if(baseTypeName != "UInt64") { #>
+        public static <#=baseTypeName#>_s operator -(<#=baseTypeName#>_s value) => (<#=baseTypeName#>)(-NumberEncryption.DecryptionAs<#=baseTypeName#>(value._value));
+        <# } #>
+
+        public static <#=baseTypeName#>_s operator ++(<#=baseTypeName#>_s value) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(value._value) + 1);
+
+        public static <#=baseTypeName#>_s operator --(<#=baseTypeName#>_s value) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(value._value) - 1);
+
+        public static <#=baseTypeName#>_s operator +(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) + NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator -(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) - NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator *(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) * NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator /(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) / NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator %(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) % NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator +(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) + right);
+
+        public static <#=baseTypeName#>_s operator -(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) - right);
+
+        public static <#=baseTypeName#>_s operator *(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) * right);
+
+        public static <#=baseTypeName#>_s operator /(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) / right);
+
+        public static <#=baseTypeName#>_s operator %(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) % right);
+
+        public static <#=baseTypeName#>_s operator +(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(left + NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator -(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(left - NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator *(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(left * NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator /(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(left / NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator %(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(left % NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static bool operator ==(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) == NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator !=(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) != NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator <(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) < NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator >(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) > NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator <=(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) <= NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator >=(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) >= NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator ==(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) == right;
+
+        public static bool operator !=(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) != right;
+
+        public static bool operator <(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) < right;
+
+        public static bool operator >(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) > right;
+
+        public static bool operator <=(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) <= right;
+
+        public static bool operator >=(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) >= right;
+
+        public static bool operator ==(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => left == NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator !=(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => left != NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator <(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => left < NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator >(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => left > NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator <=(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => left <= NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        public static bool operator >=(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => left >= NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value);
+
+        <# if(!skipBitOperatorList.Contains(baseTypeName)) { #>
+
+        public static <#=baseTypeName#>_s operator |(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) | NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator ^(<#=baseTypeName#>_s left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) ^ NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+        
+        public static <#=baseTypeName#>_s operator |(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) | right);
+
+        public static <#=baseTypeName#>_s operator ^(<#=baseTypeName#>_s left, <#=baseTypeName#> right) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(left._value) ^ right);
+        
+        public static <#=baseTypeName#>_s operator |(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(left | NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator ^(<#=baseTypeName#> left, <#=baseTypeName#>_s right) => (<#=baseTypeName#>)(left ^ NumberEncryption.DecryptionAs<#=baseTypeName#>(right._value));
+
+        public static <#=baseTypeName#>_s operator <<(<#=baseTypeName#>_s value, int count) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(value._value) << count);
+
+        public static <#=baseTypeName#>_s operator >>(<#=baseTypeName#>_s value, int count) => (<#=baseTypeName#>)(NumberEncryption.DecryptionAs<#=baseTypeName#>(value._value) >> count);
+
+        <# } #>
+        
+
+        #endregion operators
+
+        public <#=baseTypeName#> ToPrimitive() => NumberEncryption.DecryptionAs<#=baseTypeName#>(_value);
+
+        public int CompareTo(object obj)
+        {
+            if (obj is <#=baseTypeName#>)
+            {
+                <#=baseTypeName#> thisValue = ToPrimitive();
+                if ((<#=baseTypeName#>)obj < thisValue)
+                {
+                    return 1;
+                }
+                else if ((<#=baseTypeName#>)obj > thisValue)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else if (obj is <#=baseTypeName#>_s)
+            {
+                return CompareTo((<#=baseTypeName#>_s)obj);
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public int CompareTo(<#=baseTypeName#>_s other)
+        {
+            <#=baseTypeName#> thisValue = ToPrimitive();
+            <#=baseTypeName#> otherValue = NumberEncryption.DecryptionAs<#=baseTypeName#>(other._value);
+            if (otherValue < thisValue)
+            {
+                return 1;
+            }
+            else if (otherValue > thisValue)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public bool Equals(<#=baseTypeName#>_s other) => this == other;
+
+        public string ToString(string format, IFormatProvider formatProvider) => ToPrimitive().ToString(format, formatProvider);
+
+        public override string ToString() => ToPrimitive().ToString();
+    }
+
+<# } #>
+}

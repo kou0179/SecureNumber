@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureNumber", "SecureType\SecureNumber.csproj", "{9B81D7B3-74B4-4522-90E1-D8FC9273511A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{820274B1-CF2D-4705-AECE-3F6EB70B6570}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureNumberTest", "SecureNumberTest\SecureNumberTest.csproj", "{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B81D7B3-74B4-4522-90E1-D8FC9273511A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B81D7B3-74B4-4522-90E1-D8FC9273511A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B81D7B3-74B4-4522-90E1-D8FC9273511A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B81D7B3-74B4-4522-90E1-D8FC9273511A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C691DCA-F10B-4E6E-A354-793E08AC05AC}
+	EndGlobalSection
+EndGlobal

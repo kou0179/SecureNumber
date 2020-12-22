@@ -1,0 +1,10 @@
+﻿[*.{cs,vb}]
+
+# IDE0049: 名前を単純化します
+dotnet_style_predefined_type_for_locals_parameters_members = true:none
+
+# IDE0049: 名前を単純化します
+dotnet_style_predefined_type_for_member_access = true:none
+
+# IDE0049: 名前を単純化します
+dotnet_diagnostic.IDE0049.severity = none
