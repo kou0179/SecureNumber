@@ -3,14 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureNumber", "SecureNumber\SecureNumber.csproj", "{9B81D7B3-74B4-4522-90E1-D8FC9273511A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureNumber", "SecureNumber\SecureNumber.csproj", "{9B81D7B3-74B4-4522-90E1-D8FC9273511A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{820274B1-CF2D-4705-AECE-3F6EB70B6570}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureNumberTest", "SecureNumberTest\SecureNumberTest.csproj", "{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureNumberTest", "SecureNumberTest\SecureNumberTest.csproj", "{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{C111C8D2-CAD8-4DAE-9478-425E189C2FDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YourWallet.cs", "YourWallet.cs\YourWallet.cs.csproj", "{17E04504-9ED9-4563-82CA-0216CC44C49E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +30,16 @@ Global
 		{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFF1BCDC-A490-43DB-835F-EC91D85F0A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17E04504-9ED9-4563-82CA-0216CC44C49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E04504-9ED9-4563-82CA-0216CC44C49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E04504-9ED9-4563-82CA-0216CC44C49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E04504-9ED9-4563-82CA-0216CC44C49E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17E04504-9ED9-4563-82CA-0216CC44C49E} = {C111C8D2-CAD8-4DAE-9478-425E189C2FDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C691DCA-F10B-4E6E-A354-793E08AC05AC}
